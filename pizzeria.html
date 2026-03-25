@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Pizzeria · Pizza · Burgers · Sandwiches</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rojo: #D92B2B;
+    --rojo-oscuro: #A51F1F;
+    --amarillo: #FFD600;
+    --amarillo-oscuro: #E0BB00;
+    --negro: #111111;
+    --gris-oscuro: #1A1A1A;
+    --gris-medio: #2A2A2A;
+    --blanco: #FFFFFF;
+    --texto-claro: rgba(255,255,255,0.85);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--negro);
+    color: var(--blanco);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: var(--negro);
+    border-bottom: 3px solid var(--rojo);
+    padding: 0 2rem;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.9rem;
+    color: var(--blanco);
+    letter-spacing: 2px;
+  }
+  .nav-logo span { color: var(--rojo); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--texto-claro);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--amarillo); }
+
+  .nav-tel {
+    background: var(--rojo);
+    color: white;
+    padding: 7px 18px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-tel:hover { background: var(--rojo-oscuro); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--negro);
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 62px;
+  }
+
+  .hero-stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent, transparent 40px,
+      rgba(217,43,43,0.04) 40px, rgba(217,43,43,0.04) 80px
+    );
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(217,43,43,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--rojo);
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 9vw, 7rem);
+    line-height: 0.9;
+    color: var(--blanco);
+    margin-bottom: 1rem;
+    animation: fadeUp 0.6s ease 0.15s both;
+  }
+  .hero-titulo .acento { color: var(--rojo); }
+  .hero-titulo .amarillo { color: var(--amarillo); }
+.hero-titulo .naranja { color: #F97316; }
+  .hero-titulo .alitas { color: #F59E0B;}
+  .hero-titulo .mas{
+  color: rgba(255,255,255,0.7);
+   font-size: 0.7em;
+  letter-spacing: 2px;
+}
+  .hero-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 440px;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.45s both;
+  }
+
+  .btn-rojo {
+    background: var(--rojo);
+    color: white;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-rojo:hover { background: var(--rojo-oscuro); transform: translateY(-2px); }
+
+  .btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.25);
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--amarillo); color: var(--amarillo); }
+
+  .hero-logo-lado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 1s ease 0.5s both;
+  }
+
+  .logo-circulo {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: var(--gris-medio);
+    border: 4px solid var(--rojo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 60px rgba(217,43,43,0.3), 0 0 120px rgba(217,43,43,0.1);
+    position: relative;
+  }
+
+  .logo-circulo::before {
+    content: '';
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    border: 1px dashed rgba(255,255,255,0.1);
+  }
+
+  /* STRIP */
+  .categorias-strip { background: var(--rojo); overflow: hidden; }
+  .strip-inner {
+    display: flex;
+    animation: scrollStrip 20s linear infinite;
+    white-space: nowrap;
+  }
+  .strip-item {
+    padding: 12px 2.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.9);
+    flex-shrink: 0;
+  }
+  .strip-item span { color: var(--amarillo); margin-right: 2.5rem; }
+
+  @keyframes scrollStrip {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* MENÚ */
+  .seccion-menu { padding: 6rem 2rem; background: var(--gris-oscuro); }
+  .contenedor { max-width: 1100px; margin: 0 auto; }
+  .seccion-header { margin-bottom: 3rem; }
+
+  .etiqueta {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rojo);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .seccion-titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--blanco);
+    line-height: 1;
+  }
+  .seccion-titulo .amarillo { color: var(--amarillo); }
+  .seccion-titulo .rojo { color: var(--rojo); }
+
+  .linea-roja { width: 50px; height: 4px; background: var(--rojo); border-radius: 2px; margin-top: 1rem; }
+
+  .menu-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 1rem;
+  }
+
+  .menu-tab {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    padding: 9px 22px;
+    border-radius: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .menu-tab.activo, .menu-tab:hover {
+    background: var(--rojo);
+    border-color: var(--rojo);
+    color: white;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .menu-categoria { display: none; }
+  .menu-categoria.visible { display: grid; }
+
+  .menu-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+  }
+  .menu-item:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(217,43,43,0.4);
+    transform: translateX(4px);
+  }
+
+  .menu-nombre { font-weight: 800; font-size: 0.95rem; color: var(--blanco); margin-bottom: 3px; }
+  .menu-desc { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+  .menu-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--amarillo); white-space: nowrap; }
+
+  /* HORARIO */
+  .seccion-horario { padding: 6rem 2rem; background: var(--negro); }
+
+  .horario-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  .horario-tabla {
+    background: var(--gris-medio);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .horario-fila {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+  }
+  .horario-fila:last-child { border-bottom: none; }
+  .horario-fila:hover { background: rgba(255,255,255,0.03); }
+
+  .dia { font-weight: 800; font-size: 0.9rem; color: var(--blanco); }
+  .horas { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.55); text-align: right; }
+
+  .badge-abierto {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #2ECC71;
+  }
+  .badge-abierto::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #2ECC71;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .badge-cerrado { font-size: 0.82rem; font-weight: 900; color: var(--rojo); }
+
+  .contacto-bloque h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    color: var(--blanco);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .contacto-bloque p {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .tel-boton {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--rojo);
+    color: white;
+    text-decoration: none;
+    padding: 1.25rem 2rem;
+    border-radius: 10px;
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+    margin-bottom: 1.5rem;
+  }
+  .tel-boton:hover {
+    background: var(--rojo-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(217,43,43,0.35);
+  }
+
+  .info-box {
+    background: rgba(255,214,0,0.08);
+    border: 1px solid rgba(255,214,0,0.2);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+  }
+  .info-box p { color: rgba(255,255,255,0.7); font-size: 0.85rem; margin: 0; line-height: 1.6; }
+  .info-box strong { color: var(--amarillo); font-weight: 900; }
+
+  /* BANNER */
+  .banner {
+    background: var(--rojo);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .banner::before, .banner::after {
+    content: '🍕';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.04;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .banner::before { left: -2rem; }
+  .banner::after  { right: -2rem; }
+
+  .banner h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    color: white;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  .banner p { color: rgba(255,255,255,0.8); font-size: 1rem; margin-bottom: 2rem; position: relative; }
+
+  .btn-amarillo {
+    background: var(--amarillo);
+    color: var(--negro);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .btn-amarillo:hover { background: var(--amarillo-oscuro); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #0A0A0A;
+    padding: 4rem 2rem 2rem;
+    border-top: 3px solid var(--rojo);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto 3rem;
+  }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: white; letter-spacing: 2px; margin-bottom: 1rem; }
+  .footer-logo span { color: var(--rojo); }
+  .footer-desc { font-size: 0.875rem; color: rgba(255,255,255,0.4); line-height: 1.8; max-width: 280px; }
+  .footer-col h4 { font-size: 0.72rem; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; color: var(--amarillo); margin-bottom: 1.25rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.65rem; font-size: 0.875rem; color: rgba(255,255,255,0.45); }
+  .footer-col ul li a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--amarillo); }
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ANIMACIONES */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .appear {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .appear.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; }
+    .hero-logo-lado { display: none; }
+    .hero-btns { justify-content: center; }
+    .horario-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .esp-movil { grid-template-columns: repeat(2,1fr) !important; } 
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">LA <span>PIZZERIA</span></span>
+  <ul class="nav-links">
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#horario">Horario</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="tel:956 84 15 15" class="nav-tel">📞 956 84 15 15</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-stripes"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div>
+      <h1 class="hero-titulo">
+        PIZZA<br>
+        <span class="acento">BURGERS</span><br>
+        <span class="amarillo">SANDWICHES</span><br>
+        <span class="naranja">ARROCES</span><br>
+        <span class="mas">Y MUCHO MÁS...</span>
+      </h1>
+      <p class="hero-desc">
+<p class="hero-desc" style="font-size: 1.15rem; font-weight: 900; color: white; letter-spacing: 0.5px;">
+  Ven a probar una de las mejores 
+  <span style="color: var(--amarillo);">pizzas artesanas</span>
+</p>
+</p>
+      <p class="hero-desc">
+        Servicio en mesa o recoger.
+      </p>
+      <div class="hero-btns">
+        <a href="#menu" class="btn-rojo">Ver la carta</a>
+        <a href="tel:956841515" class="btn-outline">📞 Pedir ahora</a>
+      </div>
+      <p class="hero-desc">
+      </p>
+    </div>
+    <div class="hero-logo-lado">
+  <img src="logo.png" alt="La Pizzeria" style="width: 280px; height: 280px; object-fit: contain;">
+</div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="categorias-strip">
+  <div class="strip-inner">
+    <span class="strip-item">🍕 PIZZA <span>★</span></span>
+    <span class="strip-item">🍔 HAMBURGUESAS <span>★</span></span>
+    <span class="strip-item">🥪 BOCADILLOS <span>★</span></span>
+    <span class="strip-item">🍟 PATATAS <span>★</span></span>
+    <span class="strip-item">🥤 BEBIDAS <span>★</span></span>
+    <span class="strip-item">🍕 PIZZA <span>★</span></span>
+    <span class="strip-item">🍔 HAMBURGUESAS <span>★</span></span>
+    <span class="strip-item">🥪 ARROCES <span>★</span></span>
+    <span class="strip-item">🍟 PATATAS <span>★</span></span>
+    <span class="strip-item">🥤 BEBIDAS <span>★</span></span>
+    <span class="strip-item">🍕 PIZZA <span>★</span></span>
+    <span class="strip-item">🍔 HAMBURGUESAS <span>★</span></span>
+    <span class="strip-item">🥪 BOCADILLOS <span>★</span></span>
+    <span class="strip-item">🍟 PATATAS <span>★</span></span>
+    <span class="strip-item">🥤 BEBIDAS <span>★</span></span>
+    <span class="strip-item">🍕 PIZZA <span>★</span></span>
+    <span class="strip-item">🍔 HAMBURGUESAS <span>★</span></span>
+    <span class="strip-item">🥪 BOCADILLOS <span>★</span></span>
+    <span class="strip-item">🍟 PATATAS <span>★</span></span>
+    <span class="strip-item">🥤 BEBIDAS <span>★</span></span>
+  </div>
+</div>
+
+<!-- MENÚ -->
+<section class="seccion-menu" id="menu">
+  <div class="contenedor">
+    <div class="seccion-header appear">
+      <span class="etiqueta">Lo que más gusta</span>
+      <h2 class="seccion-titulo">NUESTRA <span class="rojo">CARTA</span></h2>
+      <div class="linea-roja"></div>
+    </div>
+
+    <div class="menu-tabs appear">
+      <button class="menu-tab activo" onclick="mostrarCat('pizzas',this)">🍕 Pizzas</button>
+      <button class="menu-tab" onclick="mostrarCat('hamburguesas',this)">🍔 Hamburguesas</button>
+      <button class="menu-tab" onclick="mostrarCat('sandwiches',this)">🥪 Sándwiches</button>
+      <button class="menu-tab" onclick="mostrarCat('todo',this)">🍟 De todo un poco</button>
+    </div>
+
+    <!-- PIZZAS -->
+    <div class="menu-categoria visible" id="cat-pizzas">
+
+      <div style="background:rgba(217,43,43,0.12);border:1px solid rgba(217,43,43,0.3);border-radius:12px;padding:1.5rem 2rem;margin-bottom:1.5rem;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--amarillo);margin-bottom:1rem;">ELIGE TU BASE · BASE DE TOMATE CASERA + QUESO</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:0.75rem;">
+          <div style="text-align:center;background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;">
+            <div style="font-weight:900;font-size:0.85rem;color:white;">PEQUEÑA</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--amarillo);">4,50€</div>
+          </div>
+          <div style="text-align:center;background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;">
+            <div style="font-weight:900;font-size:0.85rem;color:white;">MEDIANA</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--amarillo);">5,50€</div>
+          </div>
+          <div style="text-align:center;background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;">
+            <div style="font-weight:900;font-size:0.85rem;color:white;">GRANDE</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--amarillo);">6,50€</div>
+          </div>
+          <div style="text-align:center;background:rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;">
+            <div style="font-weight:900;font-size:0.85rem;color:white;">FAMILIAR</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--amarillo);">7,50€</div>
+          </div>
+        </div>
+        <div style="margin-top:1rem;font-size:0.8rem;color:rgba(255,255,255,0.5);">
+          + ingrediente: <strong style="color:white;">1,50€</strong> (Familiar y Grande) &nbsp;·&nbsp; <strong style="color:white;">1,30€</strong> (Mediana y Pequeña)
+        </div>
+      </div>
+<div style="margin-bottom:1rem;">
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--amarillo);margin-bottom:1rem;">ESPECIALIDADES · 3 INGREDIENTES INCLUIDOS</div>
+<div class="esp-movil" style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;">
+
+    <div class="menu-item" style="flex-direction:column;align-items:flex-start;gap:0.4rem;padding:0;overflow:hidden;">
+      <img src="pizza1.PNG" alt="Pizza Mexicana" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+      <div style="padding:0.9rem 1.1rem;">
+        <div class="menu-nombre" style="color:var(--rojo);">Mexicana</div>
+        <div class="menu-desc">Ternera, cheddar y bacon</div>
+      </div>
+    </div>
+
+    <div class="menu-item" style="flex-direction:column;align-items:flex-start;gap:0.4rem;padding:0;overflow:hidden;">
+      <img src="pizza2.PNG" alt="Pizza Diablo" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+      <div style="padding:0.9rem 1.1rem;">
+        <div class="menu-nombre" style="color:var(--rojo);">Diablo</div>
+        <div class="menu-desc">Jalapeños, pepperoni y pimiento rojo</div>
+      </div>
+    </div>
+
+    <div class="menu-item" style="flex-direction:column;align-items:flex-start;gap:0.4rem;padding:0;overflow:hidden;">
+      <img src="pizza4.PNG" alt="Pizza Carbonara" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;">
+      <div style="padding:0.9rem 1.1rem;">
+        <div class="menu-nombre" style="color:var(--rojo);">Carbonara</div>
+        <div class="menu-desc">Champiñón, bacon y nata</div>
+      </div>
+    </div>
+
+    <div class="menu-item" style="flex-direction:column;align-items:flex-start;gap:0.4rem;padding:0;overflow:hidden;">
+      <img src="bbq.PNG" alt="Pizza BBQ" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;object-position:center 30%;">
+      <div style="padding:0.9rem 1.1rem;">
+        <div class="menu-nombre" style="color:var(--rojo);">BBQ</div>
+        <div class="menu-desc">Pollo, bacon y salsa BBQ</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:12px;padding:1.5rem 2rem;">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--amarillo);margin-bottom:1rem;">ELIGE TUS INGREDIENTES</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.5rem;">
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🐷 Jamón</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🥩 Chorizo</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🥓 Bacon</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🐄 Ternera</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍗 Pollo</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍕 Pepperoni</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🌭 Salchicha</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍖 Salsa BBQ</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🐟 Atún</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍤 Gambas</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🐟 Anchoas</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🥚 Huevo</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🥛 Nata</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🧀 Cheddar</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🧀 Roquefort</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🧀 Extra queso</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🧅 Cebolla</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🫑 Pimiento</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🌶️ Jalapeños</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍅 Tomate natural</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍍 Piña</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🌽 Maíz</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🍄 Champiñones</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🫒 Aceitunas negras</span>
+          <span style="font-size:0.82rem;color:rgba(255,255,255,0.7);padding:5px 0;">🌿 Alcaparras</span>
+        </div>
+        <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.78rem;color:rgba(255,255,255,0.4);">
+          📦 Caja y envase para llevar: <strong style="color:white;">0,50€</strong> &nbsp;·&nbsp; 🍅 Ketchup y mayonesa: <strong style="color:white;">0,50€</strong> &nbsp;·&nbsp; 🛵 Servicio a domicilio: <strong style="color:white;">2€</strong>
+        </div>
+      </div>
+
+    </div>
+
+  <!-- HAMBURGUESAS -->
+<div class="menu-categoria" id="cat-hamburguesas">
+  <div style="display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:stretch;">
+    
+    <div>
+      <div class="menu-item"><div><div class="menu-nombre">Hamburguesa Simple</div></div><span class="menu-precio">3,00€</span></div>
+      <div class="menu-item" style="margin-top:0.5rem;"><div><div class="menu-nombre">Hamburguesa con Queso</div></div><span class="menu-precio">3,50€</span></div>
+      <div class="menu-item" style="margin-top:0.5rem;"><div><div class="menu-nombre">Hamburguesa Queso y Bacon</div></div><span class="menu-precio">4,00€</span></div>
+      <div class="menu-item" style="margin-top:0.5rem;"><div><div class="menu-nombre">Hamburguesa Completa</div><div class="menu-desc">Queso, bacon, lechuga, tomate, cebolla</div></div><span class="menu-precio">4,70€</span></div>
+      <div class="menu-item" style="margin-top:0.5rem;"><div><div class="menu-nombre">Hamburguesa Doble Completa</div><div class="menu-desc">Doble carne, queso, bacon, lechuga, tomate, cebolla</div></div><span class="menu-precio">5,50€</span></div>
+    </div>
+
+    <div style="width:280px;border-radius:12px;overflow:hidden;">
+      <img src="hamburguesa.PNG" alt="Hamburguesa" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center 60%;">
+    </div>
+
+  </div>
+</div>
+
+
+    <!-- SÁNDWICHES -->
+    <div class="menu-categoria menu-grid" id="cat-sandwiches">
+      <div class="menu-item"><div><div class="menu-nombre">Sandwich Club</div><div class="menu-desc">Jamón york, queso, lechuga, tomate, bacon, mayo</div></div><span class="menu-precio">4,90€</span></div>
+      <div class="menu-item"><div><div class="menu-nombre">Sandwich Pollo</div><div class="menu-desc">Pollo a la plancha, lechuga, tomate, mayo</div></div><span class="menu-precio">3,70€</span></div>
+      <div class="menu-item"><div><div class="menu-nombre">Sandwich Completo</div><div class="menu-desc">Jamón, queso, lechuga, tomate, huevo</div></div><span class="menu-precio">4,00€</span></div>
+      <div class="menu-item"><div><div class="menu-nombre">Sandwich JQH</div><div class="menu-desc">Jamón, queso y huevo</div></div><span class="menu-precio">3,70€</span></div>
+      <div class="menu-item"><div><div class="menu-nombre">Sandwich Mixto</div><div class="menu-desc">Jamón york y queso fundido</div></div><span class="menu-precio">3,20€</span></div>
+    </div>
+<!-- DE TODO UN POCO -->
+<div class="menu-categoria" id="cat-todo">
+
+  <style>
+    .acordeon-item { border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; overflow: hidden; margin-bottom: 0.6rem; }
+    .acordeon-header {
+      width: 100%; background: rgba(255,255,255,0.04); border: none; color: white;
+      font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 0.95rem;
+      padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; transition: background 0.2s; text-align: left; letter-spacing: 0.5px;
+    }
+    .acordeon-header:hover { background: rgba(255,255,255,0.08); }
+    .acordeon-header.abierto { background: rgba(217,43,43,0.15); border-bottom: 1px solid rgba(217,43,43,0.2); }
+    .acordeon-flecha { font-size: 0.75rem; color: var(--amarillo); transition: transform 0.3s; }
+    .acordeon-header.abierto .acordeon-flecha { transform: rotate(180deg); }
+    .acordeon-body { display: none; padding: 1rem 1.25rem; background: rgba(255,255,255,0.02); }
+    .acordeon-body.abierto { display: block; }
+    .todo-fila { display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .todo-fila:last-of-type { border-bottom: none; }
+    .todo-nombre { font-size: 0.9rem; font-weight: 700; color: white; }
+    .todo-desc { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 2px; }
+    .todo-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--amarillo); white-space: nowrap; flex-shrink: 0; margin-left: 1rem; }
+    .todo-nota { margin-top: 0.75rem; font-size: 0.75rem; color: rgba(255,255,255,0.35); line-height: 1.6; }
+    .todo-nota strong { color: rgba(255,255,255,0.7); }
+  </style>
+
+  <!-- Patatas -->
+  <div class="acordeon-item">
+    <button class="acordeon-header abierto" onclick="toggleAcordeon(this)">
+      <span> Patatas</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body abierto">
+      <div class="todo-fila"><div><div class="todo-nombre">Patatas Fritas</div></div><span class="todo-precio">3,00€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Patatas con Queso</div></div><span class="todo-precio">4,20€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Patatas Carne y Queso</div></div><span class="todo-precio">5,70€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Patatas Bacon y Queso</div></div><span class="todo-precio">5,70€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Aros de Cebolla</div></div><span class="todo-precio">4,50€</span></div>
+    </div>
+  </div>
+
+  <!-- Nachos -->
+  <div class="acordeon-item">
+    <button class="acordeon-header" onclick="toggleAcordeon(this)">
+      <span> Nachos</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body">
+      <div class="todo-fila"><div><div class="todo-nombre">Nachos con Queso</div></div><span class="todo-precio">6,50€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Nachos con Carne y Queso</div></div><span class="todo-precio">7,50€</span></div>
+      <div class="todo-nota">
+        Extra salsa: <strong>+1,00€</strong> &nbsp;·&nbsp; Extra cheddar, BBQ, jalapeños…: <strong>+1,50€</strong><br>
+        <span style="font-size:0.7rem;color:rgba(255,255,255,0.25);">*Algunos platos contienen gluten solo en sus salsas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pollo -->
+  <div class="acordeon-item">
+    <button class="acordeon-header" onclick="toggleAcordeon(this)">
+      <span> Pollo</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body">
+      <div class="todo-fila"><div><div class="todo-nombre">Nuggets con Patatas</div></div><span class="todo-precio">4,00€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Alitas de Pollo Caseras</div></div><span class="todo-precio">4,70€</span></div>
+    </div>
+  </div>
+
+  <!-- Arroces -->
+  <div class="acordeon-item">
+    <button class="acordeon-header" onclick="toggleAcordeon(this)">
+      <span> Arroces</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body">
+      <div class="todo-fila"><div><div class="todo-nombre">½ Arroz Frito</div></div><span class="todo-precio">6,00€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Arroz Frito</div></div><span class="todo-precio">10,00€</span></div>
+    </div>
+  </div>
+
+  <!-- Ensaladas -->
+  <div class="acordeon-item">
+    <button class="acordeon-header" onclick="toggleAcordeon(this)">
+      <span> Ensaladas</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body">
+      <div class="todo-fila"><div><div class="todo-nombre">½ Ensalada de la Casa</div></div><span class="todo-precio">5,50€</span></div>
+      <div class="todo-fila"><div><div class="todo-nombre">Ensalada de la Casa</div><div class="todo-desc">Lechuga, tomate, cebolla, zanahoria, atún</div></div><span class="todo-precio">7,00€</span></div>
+    </div>
+  </div>
+
+  <!-- Perritos -->
+  <div class="acordeon-item">
+    <button class="acordeon-header" onclick="toggleAcordeon(this)">
+      <span> Perritos</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body">
+      <div class="todo-fila"><div><div class="todo-nombre">Perrito</div></div><span class="todo-precio">3,00€</span></div>
+      <div class="todo-nota">Extra perrito: <strong>+0,50€</strong> &nbsp;·&nbsp; Extra huevo: <strong>+0,70€</strong></div>
+    </div>
+  </div>
+
+  <!-- Bebidas -->
+  <div class="acordeon-item">
+    <button class="acordeon-header" onclick="toggleAcordeon(this)">
+      <span> Bebidas</span>
+      <span class="acordeon-flecha">▼</span>
+    </button>
+    <div class="acordeon-body">
+      <div class="todo-fila"><div><div class="todo-nombre">Refresco</div><div class="todo-desc">Coca-Cola, Fanta, Sprite, agua</div></div><span class="todo-precio">1,50€</span></div>
+    </div>
+  </div>
+
+</div>
+
+    </div>
+
+    <p style="margin-top:2rem;font-size:0.78rem;color:rgba(255,255,255,0.25);font-style:italic;">
+      * Precios orientativos. Llámanos para confirmar disponibilidad y carta del día.
+    </p>
+  </div>
+</section>
+<!-- HORARIO -->
+<section class="seccion-horario" id="horario">
+  <div class="contenedor">
+    <div class="seccion-header appear">
+      <span class="etiqueta">Cuándo estamos</span>
+      <h2 class="seccion-titulo">HORARIO <span class="amarillo">Y CONTACTO</span></h2>
+      <div class="linea-roja"></div>
+    </div>
+
+    <div class="horario-grid">
+      <div class="horario-tabla appear">
+        <div class="horario-fila"><span class="dia">Lunes</span><span class="badge-abierto">20:00 – 23:30</span></div>
+        <div class="horario-fila"><span class="dia">Martes</span><span class="badge-cerrado">✕ Cerrado</span></div>
+        <div class="horario-fila"><span class="dia">Miércoles</span><span class="badge-abierto">20:00 – 23:30</span></div>
+        <div class="horario-fila"><span class="dia">Jueves</span><span class="badge-abierto">20:00 – 23:30</span></div>
+        <div class="horario-fila"><span class="dia">Viernes</span><span class="badge-abierto">13:30 – 15:30 &nbsp;·&nbsp; 20:00 – 23:30</span></div>
+        <div class="horario-fila"><span class="dia">Sábado</span><span class="badge-abierto">13:30 – 15:30 &nbsp;·&nbsp; 20:00 – 23:30</span></div>
+        <div class="horario-fila"><span class="dia">Domingo</span><span class="badge-abierto">13:30 – 15:30 &nbsp;·&nbsp; 20:00 – 23:30</span></div>
+      </div>
+
+      <div class="contacto-bloque appear">
+        <h3>¿TIENES<br>HAMBRE?</h3>
+        <p>Llámanos para pedir, reservar mesa o preguntar. Estaremos encantados de atenderte.</p>
+        <a href="tel:956841515" class="tel-boton">📞 956 84 15 15</a>
+        <div class="info-box">
+          <p><strong>🛵 También a domicilio</strong><br>
+          Llámanos con tu pedido y te lo llevamos a casa por 2€.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BANNER -->
+<section class="banner">
+  <h2>¿A QUÉ ESPERAS?</h2>
+  <p>Llama ahora y en breve tienes tu pedido listo</p>
+  <a href="tel:956841515" class="btn-amarillo">📞 Llamar ahora · 956 84 15 15</a>
+</section>
+
+<!-- FOOTER -->
+<footer id="contacto">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">LA <span>PIZZERIA</span></div>
+    </div>
+    <div class="footer-col">
+      <h4>Menú</h4>
+      <ul>
+        <li><a href="#menu">Pizzas</a></li>
+        <li><a href="#menu">Hamburguesas</a></li>
+        <li><a href="#menu">Extras</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="tel:956841515">📞 956 84 15 15</a></li>
+        <li>Lun, Mié, Jue: 20:00–23:30</li>
+        <li>Vie–Dom: 13:30–15:30 · 20:00–23:30</li>
+        <li style="color:var(--rojo);">Martes: Cerrado</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 La Pizzeria · Todos los derechos reservados</span>
+  </div>
+</footer>
+
+<script>
+  function mostrarCat(cat, btn) {
+    document.querySelectorAll('.menu-categoria').forEach(el => el.classList.remove('visible'));
+    document.querySelectorAll('.menu-tab').forEach(el => el.classList.remove('activo'));
+    document.getElementById('cat-' + cat).classList.add('visible');
+    btn.classList.add('activo');
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+
+  function toggleAcordeon(btn) {
+  const body = btn.nextElementSibling;
+  const estaAbierto = btn.classList.contains('abierto');
+  btn.classList.toggle('abierto', !estaAbierto);
+  body.classList.toggle('abierto', !estaAbierto);
+}
+  document.querySelectorAll('.appear').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
