@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Pizzeria · Pizza · Burgers · Sandwiches</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
   :root {
     --rojo: #D92B2B;
@@ -489,6 +492,7 @@
   }
   .appear.visible { opacity: 1; transform: translateY(0); }
 
+  
   /* ACORDEÓN */
   .acordeon-item { border: 1px solid rgba(30,20,10,0.1); border-radius: 10px; overflow: hidden; margin-bottom: 0.6rem; }
   .acordeon-header {
@@ -511,7 +515,7 @@
   .todo-precio { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--rojo); white-space: nowrap; flex-shrink: 0; margin-left: 1rem; }
   .todo-nota { margin-top: 0.75rem; font-size: 0.75rem; color: var(--texto-suave); line-height: 1.6; }
   .todo-nota strong { color: var(--texto); }
-
+.ing-lista { grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); }
   /* RESPONSIVE */
  @media (max-width: 768px) {
   .nav-links { display: none; }
@@ -521,16 +525,16 @@
   .hero-btns { justify-content: center; }
   .hero-logo-lado { justify-content: center; margin-top: 1rem; }
   .hero-logo-lado img { width: 160px !important; height: 160px !important; }
- .ing-lista { grid-template-columns: repeat(2, 1fr) !important; }
+ .ing-lista { grid-template-columns: repeat(3,1fr) !important; }
   .esp-movil { grid-template-columns: repeat(2,1fr) !important; }
- 
+ .ing-lista span { padding: 8px 0 !important; border-bottom: 1px solid rgba(30,20,10,0.06); }
 .hamburguesas-grid { grid-template-columns: 1fr !important; }
 .hamburguesa-foto { display: none !important; }
   .horario-grid { grid-template-columns: 1fr; }
 
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-}
+ 
 </style>
 </head>
 <body>
@@ -683,7 +687,7 @@
 
       <div style="background:white;border:1px solid rgba(30,20,10,0.08);border-radius:12px;padding:1.5rem 2rem;box-shadow:0 1px 4px rgba(0,0,0,0.04);">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--rojo);margin-bottom:1rem;">ELIGE TUS INGREDIENTES</div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.5rem;">
+        <div class="ing-lista" style="display:grid;gap:1rem 0.5rem;">
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🐷 Jamón</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🥩 Chorizo</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🥓 Bacon</span>
@@ -701,14 +705,14 @@
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🧀 Roquefort</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🧀 Extra queso</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🧅 Cebolla</span>
-          <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🫑 Pimiento</span>
+          <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🥦 Pimiento</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🌶️ Jalapeños</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🍅 Tomate natural</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🍍 Piña</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🌽 Maíz</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🍄 Champiñones</span>
-          <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🫒 Aceitunas negras</span>
           <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;">🌿 Alcaparras</span>
+                    <span style="font-size:0.82rem;color:var(--texto-suave);padding:5px 0;"> Aceitunas negras</span>
         </div>
         <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(30,20,10,0.07);font-size:0.78rem;color:var(--texto-suave);">
           📦 Caja y envase para llevar: <strong style="color:var(--texto);">0,50€</strong> &nbsp;·&nbsp; 🍅 Ketchup y mayonesa: <strong style="color:var(--texto);">0,50€</strong> &nbsp;·&nbsp; 🛵 Servicio a domicilio: <strong style="color:var(--texto);">2€</strong>
@@ -727,7 +731,6 @@
       <img src="hamburguesa.PNG" alt="Hamburguesa" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;object-position:center 20%;">
       <div style="padding:0.9rem 1.1rem;">
         <div class="menu-nombre" style="color:var(--rojo);">Hamburguesa Doble Completa</div>
-        <div class="menu-desc">Doble carne, queso, bacon, lechuga, tomate, cebolla</div>
       </div>
     </div>
 
@@ -868,11 +871,24 @@
 
       <div class="contacto-bloque appear">
         <h3>¿TIENES<br>HAMBRE?</h3>
-        <p>Llámanos para hacer tu pedido. Estaremos encantados de atenderte.</p>
-        <a href="https://maps.google.com/?q=Higuereta+61+Rota+Cadiz" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;color:var(--texto-suave);font-size:0.88rem;font-weight:700;text-decoration:none;margin-bottom:1.5rem;transition:color 0.2s;" onmouseover="this.style.color='var(--rojo)'" onmouseout="this.style.color='var(--texto-suave)'">
+      <p style="color:var(--texto-suave);font-size:0.92rem;line-height:1.7;margin-bottom:0.4rem;">Llámanos para hacer tu pedido. Estaremos encantados de atenderte en</p>
+<a href="https://maps.google.com/?q=Higuereta+61+Rota+Cadiz" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;color:var(--texto-suave);font-size:0.88rem;font-weight:700;text-decoration:none;margin-bottom:1.5rem;transition:color 0.2s;" onmouseover="this.style.color='var(--rojo)'" onmouseout="this.style.color='var(--texto-suave)'">
   📍 Higuereta 61, Rota, Cádiz
 </a>
         <a href="tel:956841515" class="tel-boton">📞 956 84 15 15</a>
+  
+<div style="margin-bottom:1.5rem;">
+  <p style="font-size:0.72rem;font-weight:900;letter-spacing:3px;text-transform:uppercase;color:var(--rojo);margin-bottom:0.75rem;">Síguenos en redes</p>
+  <a href="https://www.instagram.com/lapizzeria_rota/" target="_blank" style="display:inline-flex;align-items:center;gap:0.75rem;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
+    <i class="fa-brands fa-instagram" style="font-size:1.6rem;color:var(--texto);"></i>
+    <div>
+      <div style="font-weight:900;font-size:0.9rem;color:var(--texto);">@lapizzeria_rota</div>
+
+    </div>
+  </a>
+</div>
+</span>
+</div>
         <div class="info-box">
           <p><strong>🛵 También a domicilio</strong><br>
           Llámanos con tu pedido y te lo llevamos a casa por 2€.</p>
@@ -907,6 +923,12 @@
       <h4>Info</h4>
       <ul>
         <li><a href="tel:956841515">📞 956 84 15 15</a></li>
+        <li>
+<a href="https://www.instagram.com/lapizzeria_rota/" target="_blank" style="display:flex;align-items:center;gap:6px;color:rgba(250,246,240,0.45);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#E1306C'" onmouseout="this.style.color='rgba(250,246,240,0.45)'">
+ <i class="fa-brands fa-instagram" style="font-size:1.6rem;color:var(--texto);"></i>
+  @lapizzeria_rota
+</a>
+</li>
         <li>
         <a href="https://maps.google.com/?q=Higuereta+61+Rota+Cadiz"></a>
   📍 Higuereta 61, Rota, Cádiz</li>
