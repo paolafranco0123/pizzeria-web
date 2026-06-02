@@ -6,11 +6,6 @@ Sitio web diseñado y desarrollado para **La Pizzeria**, restaurante ubicado en 
 
 ---
 
-## 📸 Capturas
-
-> *(Añade aquí capturas de pantalla del proyecto)*
-
----
 
 ## ✨ Características
 
@@ -75,4 +70,4 @@ No requiere ninguna dependencia ni instalación.
 
 ## 👩‍💻 Desarrollado por
 
-**Paola Franco** — [LinkedIn](https://www.linkedin.com/in/) · [GitHub](https://github.com/paolafranco0123)
+**Paola Franco** — [LinkedIn](https://www.linkedin.com/in/paola-franco-142638298/) · [GitHub](https://github.com/paolafranco0123)
